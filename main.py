@@ -8,5 +8,6 @@ class RoadTrafficSimulation:
     self.n = n
     self.signals = ["G", "O", "R"]
     self.signal_cycle = [5, 1, 5]
+
   def change_light(self):
     pass

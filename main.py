@@ -12,5 +12,5 @@ class RoadTrafficSimulation:
   def change_light(self):
     pass
 
-
-chcyjtdc
+  def simulate(self):
+    result = [self.road]

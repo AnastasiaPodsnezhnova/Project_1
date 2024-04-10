@@ -8,17 +8,3 @@ class RoadTrafficSimulation:
     self.n = n
     self.signals = ["G", "O", "R"]
     self.signal_cycle = [5, 1, 5]
-
-  def change_light(self):
-    pass
-
-  def simulate(self):
-    result = [self.road]
-
-    def next_color(self, color):
-      if color == "G":
-        return "O"
-      elif color == "O":
-        return "R"
-      elif color == "R":
-        return "G"

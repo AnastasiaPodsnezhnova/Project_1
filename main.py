@@ -13,5 +13,4 @@ class RoadTrafficSimulation:
     pass
 
 
-def simulate(self):
-  roads = [self.road]
+chcyjtdc

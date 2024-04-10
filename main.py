@@ -20,7 +20,7 @@ class RoadTrafficSimulation:
       j = -1  # переменная цикла для while
       c_ind = new_road.index("C")  # текущий индекс машины
 
-      # поменяли for на while и добавили отдельный индекс для машины
+# поменяли for на while и добавили отдельный индекс для машины
       # т.к. если использовать for, то он каждый раз стирает следующую машину
       self.change_light()
       while j < len(new_road) - 1:
@@ -36,3 +36,30 @@ class RoadTrafficSimulation:
         # если следующий индекс после C = R
         elif new_road[c_ind + 1] == "R":
           pass
+
+        # если следующий индекс после C = O
+        elif new_road[c_ind + 1] == "O":
+          pass  # останавливаем машину на 2 итерации
+
+        # если следующий индекс после C = G
+        elif new_road[c_ind + 1] == "G":
+          new_road[c_ind] = "."
+          new_road[c_ind + 1] = "C"
+
+      # разобрались со светофорами
+      if new_road[(j + 1) % len(new_road)] in self.signals:
+        new_road[(j + 1) %
+                 len(new_road)] = self.signals[(i // sum(self.signal_cycle)) %
+                                               len(self.signals)]
+
+      result.append("".join(new_road))
+
+    return result
+
+
+# road = "C................." # пустая дорога
+road = "C...R...R.R..G....G"  # дорога со светофорами
+n = 15
+simulation = RoadTrafficSimulation(road, n)
+result = simulation.simulate()
+pprint(result)

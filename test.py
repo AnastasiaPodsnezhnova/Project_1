@@ -20,7 +20,7 @@ class RoadTrafficSimulation:
       j = -1  # переменная цикла для while
       c_ind = new_road.index("C")  # текущий индекс машины
 
-      # поменяли for на while и добавили отдельный индекс для машины
+# поменяли for на while и добавили отдельный индекс для машины
       # т.к. если использовать for, то он каждый раз стирает следующую машину
       self.change_light()
       while j < len(new_road) - 1:

@@ -14,3 +14,11 @@ class RoadTrafficSimulation:
 
   def simulate(self):
     result = [self.road]
+
+    def next_color(self, color):
+      if color == "G":
+        return "O"
+      elif color == "O":
+        return "R"
+      elif color == "R":
+        return "G"

@@ -3,65 +3,41 @@ from pprint import pprint  # импорт модуля pprint для краси�
 
 class RoadTrafficSimulation:
 
-  def __init__(self, road, n):
-    self.road = road
-    self.n = n
-    self.signals = ["G", "O", "R"]
-    self.signal_cycle = [5, 1, 5]
+    def __init__(self, road, n):
+        self.road = road
+        self.n = n
+        self.lights_time = {"G": 5, "O": 1, "R": 5}
+        self.lights = {}
+        self.prev_char = ""
 
+    def next_color(self, color):
+        if color == "G":
+            return "O"
+        elif color == "O":
+            return "R"
+        elif color == "R":
+            return "G"
 
-  def simulate(self):
-    result = [self.road]
+    def get_lights(self):
+        for i in range(len(self.road)):
+            char = self.road[i]
 
-    for i in range(self.n):
-      new_road = list(result[i])
-      j = -1  # переменная цикла для while
-      c_ind = new_road.index("C")  # текущий индекс машины
+            if char != "." and char != "C":
+                self.lights[i] = (char, self.lights_time[char])
 
-# поменяли for на while и добавили отдельный индекс для машины
-      # т.к. если использовать for, то он каждый раз стирает следующую машину
-      self.change_light()
-      while j < len(new_road) - 1:
-        j += 1
-        if c_ind == len(new_road) - 1:
-          break
+    def update_lights(self, result):
+        road = list(result)  # Преобразуем строку в список символов
+        for key in self.lights:
+            color, n = self.lights[key]
+            n -= 1
 
-        # если следующий индекс после C = .
-        if new_road[c_ind + 1] == ".":
-          new_road[c_ind] = "."
-          new_road[c_ind + 1] = "C"
+            if key != road.index("C"):
+                road[key] = color
 
-        # если следующий индекс после C = R
-        elif new_road[c_ind + 1] == "R":
-          pass
+            if n < 1:
+                color = self.next_color(color)
+                self.lights[key] = color, self.lights_time[color]
+            else:
+                self.lights[key] = color, n
 
-        # если следующий индекс после C = O
-        elif new_road[c_ind + 1] == "O":
-          pass  # останавливаем машину на 2 итерации
-
-        # если следующий индекс после C = G
-        elif new_road[c_ind + 1] == "G":
-          new_road[c_ind] = "."
-          new_road[c_ind + 1] = "C"
-
-      # разобрались со светофорами
-      if new_road[(j + 1) % len(new_road)] in self.signals:
-        new_road[(j + 1) %
-                 len(new_road)] = self.signals[(i // sum(self.signal_cycle)) %
-                                               len(self.signals)]
-
-      result.append("".join(new_road))
-
-    return result
-
-def change_light(self):
-  pass
-
-
-def simulate(self):
-  result = [self.road]
-
-  for i in range(self.n):
-    new_road = list(result[i])
-    j = -1  # переменная цикла для while
-    c_ind = new_road.index("C")  # текущий индекс машины
+        return "".join(road)

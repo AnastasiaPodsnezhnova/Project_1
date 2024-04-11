@@ -41,3 +41,4 @@ class RoadTrafficSimulation:
                 self.lights[key] = color, n
 
         return "".join(road)
+      
